@@ -11,6 +11,15 @@ html {
   padding: 0;
 }
 
+input {
+  border: none;
+  font-family:
+    Roboto Condensed,
+    system-ui,
+    Arial,
+    sans-serif;
+}
+
 :root {
   font-family:
     Roboto Condensed,
