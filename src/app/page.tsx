@@ -2,10 +2,10 @@ import { CharactersList, Search } from '@/components'
 import '@/styles/Home.css'
 
 export default function HomePage() {
-  const favouriteLayout = false
+  const favoriteLayout = false
   return (
     <div className="home">
-      {favouriteLayout && <h2 className="home__title">Favorites</h2>}
+      {favoriteLayout && <h2 className="home__title">Favorites</h2>}
       <Search />
       <CharactersList />
     </div>
