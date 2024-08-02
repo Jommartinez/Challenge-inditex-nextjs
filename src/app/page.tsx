@@ -1,4 +1,4 @@
-import { Search } from '@/components'
+import { CharactersList, Search } from '@/components'
 import '@/styles/Home.css'
 
 export default function HomePage() {
@@ -7,7 +7,7 @@ export default function HomePage() {
     <div className="home">
       {favouriteLayout && <h2 className="home__title">Favorites</h2>}
       <Search />
-      <div>grid</div>
+      <CharactersList />
     </div>
   )
 }
