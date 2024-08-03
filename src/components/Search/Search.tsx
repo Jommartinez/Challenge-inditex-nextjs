@@ -29,11 +29,13 @@ export const Search = () => {
   return (
     <section className="search">
       <div className="search__container">
-        <label htmlFor="search">
+        <label id="search" htmlFor="search">
           <Image src={icon} alt="search" width={12} height={12} priority={false} />
         </label>
         <input
           type="text"
+          id="search"
+          name="search"
           className="search__input"
           placeholder="Search a character..."
           onChange={handleChange}
