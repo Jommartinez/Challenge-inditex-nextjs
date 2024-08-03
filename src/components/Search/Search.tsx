@@ -3,13 +3,29 @@
 import Image from 'next/image'
 import icon from '@/assets/search-icon.svg'
 import './Search.css'
+import { useCharacterContext } from '@/hook'
 
 export const Search = () => {
-  const favoriteLayout = false
-  const favoriteFilter = []
-  const charactersList = []
+  const {
+    charactersList,
+    favoriteLayout,
+    favoriteList,
+    filterName,
+    setFilterName,
+    favoritesWithFilter,
+    charactersWithFilter,
+  } = useCharacterContext()
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {}
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const valueSearch = e.target.value
+    setFilterName(valueSearch)
+
+    if (favoriteLayout) {
+      favoritesWithFilter(valueSearch)
+    } else {
+      charactersWithFilter(valueSearch)
+    }
+  }
   return (
     <section className="search">
       <div className="search__container">
@@ -21,10 +37,11 @@ export const Search = () => {
           className="search__input"
           placeholder="Search a character..."
           onChange={handleChange}
+          value={filterName}
         />
       </div>
       <div className="search__result">
-        {favoriteLayout ? favoriteFilter.length : charactersList.length} RESULTS
+        {favoriteLayout ? favoriteList.length : charactersList.length} RESULTS
       </div>
     </section>
   )

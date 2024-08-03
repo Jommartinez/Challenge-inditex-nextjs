@@ -1,23 +1,40 @@
-import { CharacterInfo, ComicsList } from '@/components'
+'use client'
+
+import { CharacterInfo, ComicsList, Loading } from '@/components'
+import { useFetchCharacters } from '@/hook'
+import { Character } from '@/types'
+import { useEffect, useState } from 'react'
 
 interface Props {
   params: { id: string }
 }
 
-export default async function CharacterPage({ params }: Props) {
-  console.log('ID', params.id)
-  const character = {
-    id: 1017100,
-    name: 'A-Bomb (HAS)',
-    description:
-      "Rick Jones has been Hulk's best bud since day one, but now he's more than a friend...he's a teammate! Transformed by a Gamma energy explosion, A-Bomb's thick, armored skin is just as strong and powerful as it is blue. And when he curls into action, he uses it like a giant bowling ball of destruction! ",
-    imageUrl: 'https://i.annihil.us/u/prod/marvel/i/mg/3/20/5232158de5b16.jpg',
-    isFavorite: false,
-  }
+export default function CharacterPage({ params }: Props) {
+  const [character, setCharacter] = useState<Character | null>(null)
+  const { fetchCharacterById } = useFetchCharacters()
+
+  useEffect(() => {
+    const fetchCharacter = async () => {
+      try {
+        const fetchedCharacter = await fetchCharacterById(Number(params.id))
+        setCharacter(fetchedCharacter)
+      } catch (error) {
+        console.error('Error fetching character:', error)
+      }
+    }
+    if (params.id) fetchCharacter()
+  }, [params.id, character])
+
   return (
     <div>
-      <CharacterInfo character={character} />
-      <ComicsList characterId={params.id} />
+      {character ? (
+        <>
+          <CharacterInfo character={character} />
+          <ComicsList characterId={params.id} />
+        </>
+      ) : (
+        <Loading text="Loading character..." />
+      )}
     </div>
   )
 }

@@ -1,37 +1,42 @@
+'use client'
+
+import { useCharacterContext } from '@/hook'
 import { CharacterCard } from '../CharacterCard/CharacterCard'
 import './CharactersList.css'
+import { useEffect, useState } from 'react'
+import { Character } from '@/types'
+import { Loading } from '../Loading/Loading'
 
 export const CharactersList = () => {
-  const demo = {
-    id: 1017100,
-    name: 'A-Bomb (HAS)',
-    description:
-      "Rick Jones has been Hulk's best bud since day one, but now he's more than a friend...he's a teammate! Transformed by a Gamma energy explosion, A-Bomb's thick, armored skin is just as strong and powerful as it is blue. And when he curls into action, he uses it like a giant bowling ball of destruction! ",
-    imageUrl: 'https://i.annihil.us/u/prod/marvel/i/mg/3/20/5232158de5b16.jpg',
-    isFavorite: false,
-  }
-  const demo2 = {
-    id: 1017100,
-    name: 'A-Bomb (HAS)',
-    description:
-      "Rick Jones has been Hulk's best bud since day one, but now he's more than a friend...he's a teammate! Transformed by a Gamma energy explosion, A-Bomb's thick, armored skin is just as strong and powerful as it is blue. And when he curls into action, he uses it like a giant bowling ball of destruction! ",
-    imageUrl: 'https://i.annihil.us/u/prod/marvel/i/mg/3/20/5232158de5b16.jpg',
-    isFavorite: true,
-  }
+  const [listCharacters, setListCharacters] = useState<Character[]>([])
+
+  const { charactersList, favoriteList, favoriteLayout, favoriteFilterList } = useCharacterContext()
+
+  useEffect(() => {
+    if (favoriteLayout) {
+      setListCharacters(favoriteFilterList)
+    } else {
+      const newData: Character[] = charactersList.map((character: Character) => {
+        return {
+          ...character,
+          isFavorite: favoriteList.some((fav: Character) => fav.id === character.id),
+        }
+      })
+      setListCharacters(newData)
+    }
+  }, [charactersList, favoriteList, favoriteLayout, favoriteFilterList])
 
   return (
-    <section className="characters-list">
-      <CharacterCard character={demo} />
-      <CharacterCard character={demo2} />
-      <CharacterCard character={demo} />
-      <CharacterCard character={demo2} />
-      <CharacterCard character={demo} />
-      <CharacterCard character={demo2} />
-      <CharacterCard character={demo} />
-      <CharacterCard character={demo} />
-      <CharacterCard character={demo2} />
-      <CharacterCard character={demo} />
-      <CharacterCard character={demo} />
-    </section>
+    <>
+      {listCharacters.length === 0 && !favoriteLayout ? (
+        <Loading text="Loading characters..." />
+      ) : (
+        <section className="characters-list">
+          {listCharacters.map((character) => (
+            <CharacterCard key={character.id} character={character} />
+          ))}
+        </section>
+      )}
+    </>
   )
 }

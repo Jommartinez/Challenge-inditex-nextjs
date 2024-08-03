@@ -27,7 +27,7 @@ export const getCharacterById = (id: number) => {
     },
   })
     .then((res) => res.json())
-    .then((res) => res?.data?.results as CharacterFetch)
+    .then((res) => res?.data?.results as any[])
 }
 
 export const getComics = (id: number) => {

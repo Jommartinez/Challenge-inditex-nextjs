@@ -5,17 +5,24 @@ import Image from 'next/image'
 import { HeartIcon } from '../HeartIcon/HeartIcon'
 import { Character } from '@/types/Character'
 import './CharacterCard.css'
+import { useFavorite } from '@/hook'
 
 interface CharacterCardProps {
   character: Character
 }
 export const CharacterCard = ({ character }: CharacterCardProps) => {
-  const handleToggle = (character: Character) => {}
+  const { toggleFavorite } = useFavorite()
 
   return (
     <article className="character-card">
       <Link href={`/character/${character?.id}`} className="character-card__photo">
-        <Image fill src={character?.imageUrl ?? ''} alt={character?.name} />
+        <Image
+          priority
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          fill
+          src={character?.imageUrl ?? ''}
+          alt={character?.name}
+        />
       </Link>
       <div className="character-card__info">
         <div className="character-card__line"></div>
@@ -23,7 +30,7 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
         <button
           className="character-card__button"
           onClick={() => {
-            handleToggle(character)
+            toggleFavorite(character)
           }}
         >
           <HeartIcon isSelected={character?.isFavorite} />
