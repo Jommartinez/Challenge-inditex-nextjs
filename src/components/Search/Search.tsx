@@ -17,6 +17,7 @@ export const Search = () => {
   } = useCharacterContext()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault()
     const valueSearch = e.target.value
     setFilterName(valueSearch)
 
@@ -28,8 +29,8 @@ export const Search = () => {
   }
   return (
     <section className="search">
-      <div className="search__container">
-        <label id="search" htmlFor="search">
+      <form className="search__container">
+        <label htmlFor="search">
           <Image src={icon} alt="search" width={12} height={12} priority={false} />
         </label>
         <input
@@ -41,7 +42,7 @@ export const Search = () => {
           onChange={handleChange}
           value={filterName}
         />
-      </div>
+      </form>
       <div className="search__result">
         {favoriteLayout ? favoriteList.length : charactersList.length} RESULTS
       </div>
