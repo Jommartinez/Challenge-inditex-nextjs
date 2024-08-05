@@ -9,6 +9,7 @@ export const HeartIcon = ({ isSelected }: HeartIconProps) => {
     <>
       {isSelected ? (
         <svg
+          data-testid="selected-heart-icon"
           width="24"
           height="22"
           viewBox="0 0 24 22"
@@ -24,6 +25,7 @@ export const HeartIcon = ({ isSelected }: HeartIconProps) => {
         </svg>
       ) : (
         <svg
+          data-testid="unselected-heart-icon"
           width="26"
           height="25"
           viewBox="0 0 26 25"

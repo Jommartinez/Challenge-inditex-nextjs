@@ -34,6 +34,7 @@ export const Search = () => {
           <Image src={icon} alt="search" width={12} height={12} priority={false} />
         </label>
         <input
+          data-testid="search-input"
           type="text"
           id="search"
           name="search"
@@ -43,7 +44,7 @@ export const Search = () => {
           value={filterName}
         />
       </form>
-      <div className="search__result">
+      <div className="search__result" data-testid="search-result">
         {favoriteLayout ? favoriteList.length : charactersList.length} RESULTS
       </div>
     </section>
