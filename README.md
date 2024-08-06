@@ -44,7 +44,7 @@ El proyecto ha sido desplegado en la siguiente url para fines de demostración :
 
 La jerarquía de carpetas que se ha utilizado para el proyecto ha sido la siguiente:
 
-- Dentro de la carpeta dist encontramos el código minificado listo para subir a un servidor
+- Dentro de la carpeta .next encontramos el código minificado listo para subir a un servidor (normalmente este archivo lo excluiría con el .gitignore, pero es requisito del challenge entregar el codigo minificado)
 
 - Dentro de src encontramos todo lo necesario para el desarrollo del proyecto. Encontramos las siguientes carpetas:
 

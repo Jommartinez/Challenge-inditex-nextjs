@@ -1,0 +1,1 @@
+self.__NEXT_FONT_MANIFEST='{"pages":{},"app":{"/Users/jommartinez/Desktop/challenges/inditex-v3/challenge-inditex-nextjs/src/app/layout":["static/media/52db2a4aafb407ce-s.p.woff2"]},"appUsingSizeAdjust":true,"pagesUsingSizeAdjust":false}';
